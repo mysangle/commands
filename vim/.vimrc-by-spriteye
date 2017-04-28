@@ -1,0 +1,120 @@
+" spriteye's personal .vimrc file.
+"
+"                  _    _                              _
+"   ___ _ __  ___ (_) _| |_______   ______     __   __(_)_ __ ___
+"  / __| '_ \| ._\| ||_   _|_. \ \ / /._  \____\ \ / /| | '_ ` _ \
+"  \__ \ |_) | |  | |  | || ___|\ V /  ___|____|\ V / | | | | | | |
+"  |___/ .__/|_|  |_|  |__\____/ ) / \____/      \_/  |_|_| |_| |_|
+"      |_|                      /_/
+"
+"
+
+" Environment {{{
+    " use vim settings, rather then vi settings (much better!)
+    " this must be first, because it changes other options as a side effect.
+    set nocompatible
+    let mapleader=","                    " change the mapleader from \ to ,
+" }}}
+
+" General {{{
+    ""set background=dark             " assume a dark background
+    filetype plugin indent on       " automatically detect file types
+    syntax on                       " syntax highlighting
+    set mouse=a                     " automatically enable mouse usage
+    set termencoding=utf-8
+    set encoding=utf-8
+    set lazyredraw                  " don't update the display while executing macros
+    scriptencoding utf-8            "
+    " always switch to the current file directory
+    autocmd BufEnter * if bufname("") !~ "^\[A-Za-z0-9\]*://" | lcd %:p:h | endif
+
+    set shortmess+=filmrxoOtT       " abbrev. of message (avoid 'hit enter')
+    set viewoptions=folds,options,cursor,unix,slash " better unix / windows compatibility
+    ""set virtualedit=onemore         " allow for cursor beyond last chracter
+    " set virtualedit=all             " allow the cursor to go in to invalid places
+    set history=1000                " store a ton of history (default is 20)
+    set hidden                      " allow buffer switching without saving
+    set nobackup                    " don't keep backupfiles, it's 70's style cluttering
+    set noswapfile                  " don't write annoying intermediate swap files, who did ever
+                                    "     retore from swap files anyway?
+    set fileformats="unix,dos,mac"
+    ""set autowrite                   " automatically write a file when leaving a modified buffer
+    ""set spell                       " spell checking on
+" }}}
+
+" Vim UI {{{
+    set title                       " change the terminal's title
+    set visualbell                  " don't beep
+    set noerrorbells                " don't beep
+    set tabpagemax=15               " only show 15 tabs
+    set showmode                    " display the current mode
+    ""set nomodeline                  " disable mode lines (security measure)
+    "set cursorline                  " highlight current line
+    set number                      " show line number
+    set cmdheight=2                 " use a status bar that is 2 rows high
+
+    if has('cmdline_info')
+        set ruler                   " show the ruler
+        set rulerformat=%30(%=\:b%n%y%m%r%w\ %l,%c%V\ %P%) " a ruler on steroids
+        set showcmd                 " show partial commands in status line and selected
+                                    "     characters/lines in visual mode
+    endif
+
+    if has('statusline')
+        set laststatus=2
+        set statusline=%<%f\        " filename
+        set statusline+=%w%h%m%r    " options
+        ""set statusline+=%{fugitve#statusline()} " git hotness
+        set statusline+=\ [%{&ff}/%Y]  " filetype
+        set statusline+=\ [%{getcwd()}] " current dir
+        set statusline+=%=%-14.(%l,%c%V%)\ %p%% " right aligned file nav info
+    endif
+
+    set backspace=indent,eol,start  " backspaces for dummies
+    set linespace=0                 " no extra spaces between rows
+    set showmatch                   " show matching brackets/parenthesis
+    set incsearch                   " find as you type search
+    set hlsearch                    " highlight search temrs
+    "set gdefault                    " search/replace "globally" (on a line) by default
+    set winminheight=0              " windows cat be 0 line high
+    set ignorecase                  " case insensitive search
+    set smartcase                   " case sensitive when uc present
+    set smarttab                    " insert tabs on the start of a line according to
+                                    "     shiftwidth, not tabstop
+    set wildmenu                    " show list instead of just completing
+    set wildmode=list:longest,full  " command <tab> completion, list matches, then longest
+                                    "     common part, then all
+    set wildignore=*.swp,*.bak,*.pyc,*.class
+    set whichwrap=b,s,h,l,<,>,[,]   " backspace and cursor keys wrap to
+    ""set scrolljump=5                " lines to scroll when cursor leaves screen
+    set scrolloff=3                 " minimum lines to keep above and below cursor
+    set foldenable                  " auto fold code
+    set list
+    set listchars=tab:▸\ ,trail:·,extends:#,nbsp:· " highlight problematic whitespace
+    set nolist                      " don't show invisible characters by default, but it is
+                                    "     enabled for some file types
+" }}}
+
+" Formatting {{{
+    "set nowrap                      " don't wrap lines
+    set autoindent                  " indent at the same level of the previous line
+    set copyindent                  " copy the previous indentation on autoindenting
+    set shiftwidth=4                " use indents of 4 spaces
+    set shiftround                  " use multiple of shiftwidth when indenting with
+                                    "     '<' and '>'
+    set expandtab                   " tabs are spaces, not tabs
+    set tabstop=4                   " an indentation every four columns
+    set softtabstop=4               " let backspace delete indent
+    set pastetoggle=<F12>           " pastetoggle (sane indentation on pastes)
+    set textwidth=120               " modern monitor is wide
+" }}}
+
+" Restore cursor position upon reopening files {{{
+autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
+" }}}
+
+" Common abbreviations / misspellings {{{
+"source ~/.vim/autocorrect.vim
+" }}}
+"
+execute pathogen#infect()
