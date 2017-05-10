@@ -1,2 +1,2 @@
-docker rm `docker ps -a -g`
+docker rm `docker ps -a -q`
 
