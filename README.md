@@ -4,8 +4,9 @@ Study
 Algorithm
 ---------
 
-  - [Algorithm Design Manual](http://www.algorist.com/) - Steven Skiena
+  - [The Algorithm Design Manual](http://www.algorist.com/) - Steven Skiena
   - [알고리즘 문제 해결 전략](http://book.algospot.com/) - 구종만
+  - [LeetCode](https://leetcode.com/) - 문제 풀이 사이트
 
 Programming Languages
 ---------------------
@@ -17,6 +18,8 @@ Programming Languages
 
 Deep Learning
 -------------
+
+  - [Deep Learning](http://www.deeplearningbook.org/) - Ian Goodfellow et al.
 
 Web Assembly
 ------------
